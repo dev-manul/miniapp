@@ -2,7 +2,7 @@
   <div class="goals-container">
     <!-- App Header Component -->
     <AppHeader 
-      title="Goals"
+      :title="t('goals.title')"
       :show-back-button="true"
       :show-profile="false"
       :show-progress="false"
@@ -41,14 +41,14 @@
     <!-- Add Goal Modal -->
     <div v-if="showAddGoal" class="modal-overlay" @click="showAddGoal = false">
       <div class="modal" @click.stop>
-        <h3>Add New Goal</h3>
+        <h3>{{ t('goals.addGoal') }}</h3>
         <form @submit.prevent="addGoal">
           <div class="form-group">
-            <label>Title</label>
+            <label>{{ t('goals.goalName') }}</label>
             <input v-model="newGoal.title" type="text" required />
           </div>
           <div class="form-group">
-            <label>Description</label>
+            <label>{{ t('goals.goalDescription') }}</label>
             <textarea v-model="newGoal.description" rows="3"></textarea>
           </div>
           <div class="form-group">
@@ -63,8 +63,8 @@
             </select>
           </div>
           <div class="form-actions">
-            <button type="button" @click="showAddGoal = false" class="btn">Cancel</button>
-            <button type="submit" class="btn btn-primary">Add Goal</button>
+            <button type="button" @click="showAddGoal = false" class="btn">{{ t('app.cancel') }}</button>
+            <button type="submit" class="btn btn-primary">{{ t('goals.addGoal') }}</button>
           </div>
         </form>
       </div>
@@ -74,8 +74,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import AppHeader from '@/components/AppHeader.vue'
 import AddIcon from '@/components/icons/AddIcon.vue'
+
+const { t } = useI18n()
 
 // State
 const showAddGoal = ref(false)

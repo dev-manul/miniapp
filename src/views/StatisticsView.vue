@@ -2,7 +2,7 @@
   <div class="statistics-container">
     <!-- App Header Component -->
     <AppHeader 
-      title="Statistics"
+      :title="t('statistics.title')"
       :show-back-button="true"
       :show-profile="false"
       :show-progress="false"
@@ -57,7 +57,7 @@
 
       <!-- Progress Chart -->
       <div class="chart-section">
-        <h3 class="section-title">Weekly Progress</h3>
+        <h3 class="section-title">{{ t('statistics.trends') }}</h3>
         <div class="chart-container">
           <div class="chart-bars">
             <div 
@@ -74,7 +74,7 @@
 
       <!-- Category Breakdown -->
       <div class="category-section">
-        <h3 class="section-title">Goals by Category</h3>
+        <h3 class="section-title">{{ t('statistics.overview') }}</h3>
         <div class="category-list">
           <div 
             v-for="category in categoryData" 
@@ -103,15 +103,18 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import AppHeader from '@/components/AppHeader.vue'
+
+const { t } = useI18n()
 
 // State
 const selectedPeriod = ref('week')
 
 const timePeriods = [
-  { label: 'Week', value: 'week' },
-  { label: 'Month', value: 'month' },
-  { label: 'Year', value: 'year' }
+  { label: t('statistics.period.week'), value: 'week' },
+  { label: t('statistics.period.month'), value: 'month' },
+  { label: t('statistics.period.year'), value: 'year' }
 ]
 
 // Computed stats based on selected period

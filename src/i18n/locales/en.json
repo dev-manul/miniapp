@@ -1,0 +1,209 @@
+{
+  "app": {
+    "title": "Re:Forma",
+    "loading": "Loading...",
+    "error": "Error",
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "edit": "Edit",
+    "delete": "Delete",
+    "add": "Add",
+    "remove": "Remove",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK"
+  },
+  "navigation": {
+    "profile": "Profile",
+    "dashboard": "Dashboard",
+    "goals": "Goals",
+    "statistics": "Statistics",
+    "discounts": "Discounts",
+    "menu": "Menu"
+  },
+  "profile": {
+    "title": "Profile",
+    "basicInfo": {
+      "title": "Basic Information",
+      "username": "Username",
+      "email": "Email",
+      "dateOfBirth": "Date of Birth",
+      "gender": "Gender",
+      "location": "Location",
+      "unitsOfMeasurement": "Units of Measurement"
+    },
+    "physicalHealth": {
+      "title": "Physical Health",
+      "heightCm": "Height (cm)",
+      "currentWeightKg": "Current Weight (kg)",
+      "targetWeightKg": "Target Weight (kg)",
+      "activityLevel": "Activity Level",
+      "healthConditions": "Health Conditions",
+      "allergies": "Allergies",
+      "medications": "Medications",
+      "physicalActivityGoals": "Physical Activity Goals",
+      "nutrition": {
+        "title": "Nutrition",
+        "dietaryPreferences": "Dietary Preferences",
+        "eatingHabits": "Eating Habits",
+        "nutritionGoals": "Nutrition Goals"
+      }
+    },
+    "mentalHealth": {
+      "title": "Mental Health",
+      "currentMood": "Current Mood",
+      "stressLevel": "Stress Level",
+      "sleepQuality": "Sleep Quality",
+      "stressors": "Stressors",
+      "mentalHealthGoals": "Mental Health Goals",
+      "relaxationHobbies": "Relaxation & Hobbies",
+      "mindfulnessPractices": "Mindfulness Practices",
+      "contentPreferences": "Content Preferences"
+    },
+    "empty": "—",
+    "loading": "Loading profile...",
+    "error": "Failed to load profile"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome back!",
+    "subtitle": "Track your progress and achieve your goals",
+    "progress": "Progress",
+    "recentActivity": "Recent Activity",
+    "quickActions": "Quick Actions",
+    "daysStreak": "Days Streak",
+    "completion": "Completion",
+    "activeGoals": "Active Goals",
+    "pointsEarned": "Points Earned",
+    "timeAgo": "{time} hours ago",
+    "activities": {
+      "morningRun": "Morning Run",
+      "readPages": "Read 30 pages",
+      "drinkWater": "Drink 8 glasses of water"
+    }
+  },
+  "goals": {
+    "title": "Goals",
+    "addGoal": "Add Goal",
+    "editGoal": "Edit Goal",
+    "deleteGoal": "Delete Goal",
+    "goalName": "Goal Name",
+    "goalDescription": "Description",
+    "goalDeadline": "Deadline",
+    "goalProgress": "Progress",
+    "goalStatus": {
+      "notStarted": "Not Started",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "paused": "Paused"
+    }
+  },
+  "statistics": {
+    "title": "Statistics",
+    "overview": "Overview",
+    "trends": "Trends",
+    "achievements": "Achievements",
+    "period": {
+      "week": "Week",
+      "month": "Month",
+      "year": "Year",
+      "allTime": "All Time"
+    }
+  },
+  "telegram": {
+    "debug": "Telegram Debug",
+    "userInfo": "User Information",
+    "webAppInfo": "Web App Information",
+    "theme": "Theme",
+    "language": "Language",
+    "platform": "Platform",
+    "version": "Version",
+    "available": "Available",
+    "notAvailable": "Not Available"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Information",
+    "confirm": "Confirm",
+    "dismiss": "Dismiss",
+    "retry": "Retry",
+    "refresh": "Refresh",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "view": "View",
+    "details": "Details",
+    "settings": "Settings",
+    "help": "Help",
+    "about": "About"
+  },
+  "units": {
+    "metric": "Metric",
+    "imperial": "Imperial",
+    "cm": "cm",
+    "kg": "kg",
+    "lbs": "lbs",
+    "ft": "ft",
+    "in": "in"
+  },
+  "genders": {
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "preferNotToSay": "Prefer not to say"
+  },
+  "activityLevels": {
+    "sedentary": "Sedentary",
+    "lightlyActive": "Lightly Active",
+    "moderatelyActive": "Moderately Active",
+    "veryActive": "Very Active",
+    "extremelyActive": "Extremely Active"
+  },
+  "moods": {
+    "excellent": "Excellent",
+    "good": "Good",
+    "neutral": "Neutral",
+    "bad": "Bad",
+    "terrible": "Terrible"
+  },
+  "stressLevels": {
+    "low": "Low",
+    "moderate": "Moderate",
+    "high": "High",
+    "veryHigh": "Very High"
+  },
+  "sleepQuality": {
+    "excellent": "Excellent",
+    "good": "Good",
+    "fair": "Fair",
+    "poor": "Poor",
+    "veryPoor": "Very Poor"
+  },
+  "discounts": {
+    "title": "Discounts",
+    "searchPlaceholder": "Search discounts...",
+    "nearbyOffers": "Nearby Offers",
+    "off": "OFF",
+    "location": "Location",
+    "away": "away",
+    "validUntil": "Valid Until",
+    "getDirections": "Get Directions",
+    "share": "Share",
+    "shareText": "Check out this amazing discount:",
+    "copiedToClipboard": "Copied to clipboard!",
+    "categories": {
+      "all": "All",
+      "fitness": "Fitness",
+      "nutrition": "Nutrition",
+      "wellness": "Wellness",
+      "sports": "Sports"
+    }
+  }
+} 

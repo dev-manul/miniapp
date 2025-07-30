@@ -1,43 +1,43 @@
 <template>
   <div class="profile-container">
-    <AppHeader title="Profile" :show-back-button="true" />
+    <AppHeader :title="t('profile.title')" :show-back-button="true" />
 
     <div class="profile-content">
       <section class="profile-section">
-        <h3 class="section-title">Basic Information</h3>
-        <div class="profile-field"><span class="field-label">Username:</span> {{ basicInfo.username }}</div>
-        <div class="profile-field"><span class="field-label">Email:</span> {{ basicInfo.email }}</div>
-        <div v-if="basicInfo.dateOfBirth" class="profile-field"><span class="field-label">Date of Birth:</span> {{ formattedDateOfBirth }}</div>
-        <div v-if="basicInfo.gender" class="profile-field"><span class="field-label">Gender:</span> {{ basicInfo.gender }}</div>
-        <div v-if="basicInfo.location" class="profile-field"><span class="field-label">Location:</span> {{ basicInfo.location }}</div>
-        <div class="profile-field"><span class="field-label">Units:</span> {{ basicInfo.unitsOfMeasurement }}</div>
+        <h3 class="section-title">{{ t('profile.basicInfo.title') }}</h3>
+        <div class="profile-field"><span class="field-label">{{ t('profile.basicInfo.username') }}:</span> {{ basicInfo.username }}</div>
+        <div class="profile-field"><span class="field-label">{{ t('profile.basicInfo.email') }}:</span> {{ basicInfo.email }}</div>
+        <div v-if="basicInfo.dateOfBirth" class="profile-field"><span class="field-label">{{ t('profile.basicInfo.dateOfBirth') }}:</span> {{ formattedDateOfBirth }}</div>
+        <div v-if="basicInfo.gender" class="profile-field"><span class="field-label">{{ t('profile.basicInfo.gender') }}:</span> {{ basicInfo.gender }}</div>
+        <div v-if="basicInfo.location" class="profile-field"><span class="field-label">{{ t('profile.basicInfo.location') }}:</span> {{ basicInfo.location }}</div>
+        <div class="profile-field"><span class="field-label">{{ t('profile.basicInfo.unitsOfMeasurement') }}:</span> {{ basicInfo.unitsOfMeasurement }}</div>
       </section>
 
       <section class="profile-section">
-        <h3 class="section-title">Physical Health</h3>
-        <div v-if="physicalHealth.heightCm" class="profile-field"><span class="field-label">Height (cm):</span> {{ physicalHealth.heightCm }}</div>
-        <div v-if="physicalHealth.currentWeightKg" class="profile-field"><span class="field-label">Current Weight (kg):</span> {{ physicalHealth.currentWeightKg }}</div>
-        <div v-if="physicalHealth.targetWeightKg" class="profile-field"><span class="field-label">Target Weight (kg):</span> {{ physicalHealth.targetWeightKg }}</div>
-        <div v-if="physicalHealth.activityLevel" class="profile-field"><span class="field-label">Activity Level:</span> {{ physicalHealth.activityLevel }}</div>
-        <div v-if="physicalHealth.healthConditions.length" class="profile-field"><span class="field-label">Health Conditions:</span> {{ physicalHealth.healthConditions.join(', ') }}</div>
-        <div v-if="physicalHealth.allergies.length" class="profile-field"><span class="field-label">Allergies:</span> {{ physicalHealth.allergies.join(', ') }}</div>
-        <div v-if="physicalHealth.medications.length" class="profile-field"><span class="field-label">Medications:</span> {{ physicalHealth.medications.join(', ') }}</div>
-        <div v-if="physicalHealth.physicalActivityGoals.length" class="profile-field"><span class="field-label">Physical Activity Goals:</span> {{ physicalHealth.physicalActivityGoals.join(', ') }}</div>
-        <div v-if="physicalHealth.nutrition.dietaryPreferences.length" class="profile-field"><span class="field-label">Dietary Preferences:</span> {{ physicalHealth.nutrition.dietaryPreferences.join(', ') }}</div>
-        <div v-if="physicalHealth.nutrition.eatingHabits" class="profile-field"><span class="field-label">Eating Habits:</span> {{ physicalHealth.nutrition.eatingHabits }}</div>
-        <div v-if="physicalHealth.nutrition.nutritionGoals" class="profile-field"><span class="field-label">Nutrition Goals:</span> {{ physicalHealth.nutrition.nutritionGoals }}</div>
+        <h3 class="section-title">{{ t('profile.physicalHealth.title') }}</h3>
+        <div v-if="physicalHealth.heightCm" class="profile-field"><span class="field-label">{{ t('profile.physicalHealth.heightCm') }}:</span> {{ physicalHealth.heightCm }}</div>
+        <div v-if="physicalHealth.currentWeightKg" class="profile-field"><span class="field-label">{{ t('profile.physicalHealth.currentWeightKg') }}:</span> {{ physicalHealth.currentWeightKg }}</div>
+        <div v-if="physicalHealth.targetWeightKg" class="profile-field"><span class="field-label">{{ t('profile.physicalHealth.targetWeightKg') }}:</span> {{ physicalHealth.targetWeightKg }}</div>
+        <div v-if="physicalHealth.activityLevel" class="profile-field"><span class="field-label">{{ t('profile.physicalHealth.activityLevel') }}:</span> {{ physicalHealth.activityLevel }}</div>
+        <div v-if="physicalHealth.healthConditions.length" class="profile-field"><span class="field-label">{{ t('profile.physicalHealth.healthConditions') }}:</span> {{ physicalHealth.healthConditions.join(', ') }}</div>
+        <div v-if="physicalHealth.allergies.length" class="profile-field"><span class="field-label">{{ t('profile.physicalHealth.allergies') }}:</span> {{ physicalHealth.allergies.join(', ') }}</div>
+        <div v-if="physicalHealth.medications.length" class="profile-field"><span class="field-label">{{ t('profile.physicalHealth.medications') }}:</span> {{ physicalHealth.medications.join(', ') }}</div>
+        <div v-if="physicalHealth.physicalActivityGoals.length" class="profile-field"><span class="field-label">{{ t('profile.physicalHealth.physicalActivityGoals') }}:</span> {{ physicalHealth.physicalActivityGoals.join(', ') }}</div>
+        <div v-if="physicalHealth.nutrition.dietaryPreferences.length" class="profile-field"><span class="field-label">{{ t('profile.physicalHealth.nutrition.dietaryPreferences') }}:</span> {{ physicalHealth.nutrition.dietaryPreferences.join(', ') }}</div>
+        <div v-if="physicalHealth.nutrition.eatingHabits" class="profile-field"><span class="field-label">{{ t('profile.physicalHealth.nutrition.eatingHabits') }}:</span> {{ physicalHealth.nutrition.eatingHabits }}</div>
+        <div v-if="physicalHealth.nutrition.nutritionGoals" class="profile-field"><span class="field-label">{{ t('profile.physicalHealth.nutrition.nutritionGoals') }}:</span> {{ physicalHealth.nutrition.nutritionGoals }}</div>
       </section>
 
       <section class="profile-section">
-        <h3 class="section-title">Mental Health</h3>
-        <div v-if="mentalHealth.currentMood" class="profile-field"><span class="field-label">Current Mood:</span> {{ mentalHealth.currentMood }}</div>
-        <div v-if="mentalHealth.stressLevel" class="profile-field"><span class="field-label">Stress Level:</span> {{ mentalHealth.stressLevel }}</div>
-        <div v-if="mentalHealth.sleepQuality" class="profile-field"><span class="field-label">Sleep Quality:</span> {{ mentalHealth.sleepQuality }}</div>
-        <div v-if="mentalHealth.stressors.length" class="profile-field"><span class="field-label">Stressors:</span> {{ mentalHealth.stressors.join(', ') }}</div>
-        <div v-if="mentalHealth.mentalHealthGoals.length" class="profile-field"><span class="field-label">Mental Health Goals:</span> {{ mentalHealth.mentalHealthGoals.join(', ') }}</div>
-        <div v-if="mentalHealth.relaxationHobbies.length" class="profile-field"><span class="field-label">Relaxation Hobbies:</span> {{ mentalHealth.relaxationHobbies.join(', ') }}</div>
-        <div v-if="mentalHealth.mindfulnessPractices" class="profile-field"><span class="field-label">Mindfulness Practices:</span> {{ mentalHealth.mindfulnessPractices }}</div>
-        <div v-if="mentalHealth.contentPreferences.length" class="profile-field"><span class="field-label">Content Preferences:</span> {{ mentalHealth.contentPreferences.join(', ') }}</div>
+        <h3 class="section-title">{{ t('profile.mentalHealth.title') }}</h3>
+        <div v-if="mentalHealth.currentMood" class="profile-field"><span class="field-label">{{ t('profile.mentalHealth.currentMood') }}:</span> {{ mentalHealth.currentMood }}</div>
+        <div v-if="mentalHealth.stressLevel" class="profile-field"><span class="field-label">{{ t('profile.mentalHealth.stressLevel') }}:</span> {{ mentalHealth.stressLevel }}</div>
+        <div v-if="mentalHealth.sleepQuality" class="profile-field"><span class="field-label">{{ t('profile.mentalHealth.sleepQuality') }}:</span> {{ mentalHealth.sleepQuality }}</div>
+        <div v-if="mentalHealth.stressors.length" class="profile-field"><span class="field-label">{{ t('profile.mentalHealth.stressors') }}:</span> {{ mentalHealth.stressors.join(', ') }}</div>
+        <div v-if="mentalHealth.mentalHealthGoals.length" class="profile-field"><span class="field-label">{{ t('profile.mentalHealth.mentalHealthGoals') }}:</span> {{ mentalHealth.mentalHealthGoals.join(', ') }}</div>
+        <div v-if="mentalHealth.relaxationHobbies.length" class="profile-field"><span class="field-label">{{ t('profile.mentalHealth.relaxationHobbies') }}:</span> {{ mentalHealth.relaxationHobbies.join(', ') }}</div>
+        <div v-if="mentalHealth.mindfulnessPractices" class="profile-field"><span class="field-label">{{ t('profile.mentalHealth.mindfulnessPractices') }}:</span> {{ mentalHealth.mindfulnessPractices }}</div>
+        <div v-if="mentalHealth.contentPreferences.length" class="profile-field"><span class="field-label">{{ t('profile.mentalHealth.contentPreferences') }}:</span> {{ mentalHealth.contentPreferences.join(', ') }}</div>
       </section>
     </div>
   </div>
@@ -45,9 +45,12 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import AppHeader from '@/components/AppHeader.vue'
 import { apiService, type ProfileData } from '@/services/api'
 import { useTelegram } from '@/composables/useTelegram'
+
+const { t } = useI18n()
 
 const { user, getUserAvatar, getUserName, getUserInitials } = useTelegram()
 const userAvatar = computed(() => getUserAvatar())

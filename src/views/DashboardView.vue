@@ -2,7 +2,7 @@
   <div class="dashboard-container">
     <!-- App Header Component -->
     <AppHeader 
-      title="Dashboard"
+      :title="t('dashboard.title')"
       :show-back-button="true"
       :show-profile="false"
       :show-progress="false"
@@ -30,7 +30,7 @@
       </div>
 
       <div class="recent-activity">
-        <h3 class="section-title">Recent Activity</h3>
+        <h3 class="section-title">{{ t('dashboard.recentActivity') }}</h3>
         <div class="activity-list">
           <div class="activity-item">
             <div class="activity-icon">🏃‍♂️</div>
@@ -63,7 +63,10 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import AppHeader from '@/components/AppHeader.vue'
+
+const { t } = useI18n()
 </script>
 
 <style scoped>

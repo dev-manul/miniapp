@@ -1,0 +1,209 @@
+{
+  "app": {
+    "title": "Re:Forma",
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "back": "Назад",
+    "next": "Далее",
+    "previous": "Предыдущий",
+    "close": "Закрыть",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "add": "Добавить",
+    "remove": "Удалить",
+    "yes": "Да",
+    "no": "Нет",
+    "ok": "ОК"
+  },
+  "navigation": {
+    "profile": "Профиль",
+    "dashboard": "Панель",
+    "goals": "Цели",
+    "statistics": "Статистика",
+    "discounts": "Скидки",
+    "menu": "Меню"
+  },
+  "profile": {
+    "title": "Профиль",
+    "basicInfo": {
+      "title": "Основная информация",
+      "username": "Имя пользователя",
+      "email": "Email",
+      "dateOfBirth": "Дата рождения",
+      "gender": "Пол",
+      "location": "Местоположение",
+      "unitsOfMeasurement": "Единицы измерения"
+    },
+    "physicalHealth": {
+      "title": "Физическое здоровье",
+      "heightCm": "Рост (см)",
+      "currentWeightKg": "Текущий вес (кг)",
+      "targetWeightKg": "Целевой вес (кг)",
+      "activityLevel": "Уровень активности",
+      "healthConditions": "Состояния здоровья",
+      "allergies": "Аллергии",
+      "medications": "Лекарства",
+      "physicalActivityGoals": "Цели физической активности",
+      "nutrition": {
+        "title": "Питание",
+        "dietaryPreferences": "Диетические предпочтения",
+        "eatingHabits": "Привычки питания",
+        "nutritionGoals": "Цели питания"
+      }
+    },
+    "mentalHealth": {
+      "title": "Психическое здоровье",
+      "currentMood": "Текущее настроение",
+      "stressLevel": "Уровень стресса",
+      "sleepQuality": "Качество сна",
+      "stressors": "Источники стресса",
+      "mentalHealthGoals": "Цели психического здоровья",
+      "relaxationHobbies": "Отдых и хобби",
+      "mindfulnessPractices": "Практики осознанности",
+      "contentPreferences": "Предпочтения контента"
+    },
+    "empty": "—",
+    "loading": "Загрузка профиля...",
+    "error": "Не удалось загрузить профиль"
+  },
+  "dashboard": {
+    "title": "Панель",
+    "welcome": "Добро пожаловать!",
+    "subtitle": "Отслеживайте прогресс и достигайте целей",
+    "progress": "Прогресс",
+    "recentActivity": "Недавняя активность",
+    "quickActions": "Быстрые действия",
+    "daysStreak": "Дней подряд",
+    "completion": "Выполнение",
+    "activeGoals": "Активные цели",
+    "pointsEarned": "Заработано очков",
+    "timeAgo": "{time} часов назад",
+    "activities": {
+      "morningRun": "Утренняя пробежка",
+      "readPages": "Прочитано 30 страниц",
+      "drinkWater": "Выпить 8 стаканов воды"
+    }
+  },
+  "goals": {
+    "title": "Цели",
+    "addGoal": "Добавить цель",
+    "editGoal": "Редактировать цель",
+    "deleteGoal": "Удалить цель",
+    "goalName": "Название цели",
+    "goalDescription": "Описание",
+    "goalDeadline": "Срок",
+    "goalProgress": "Прогресс",
+    "goalStatus": {
+      "notStarted": "Не начато",
+      "inProgress": "В процессе",
+      "completed": "Завершено",
+      "paused": "Приостановлено"
+    }
+  },
+  "statistics": {
+    "title": "Статистика",
+    "overview": "Обзор",
+    "trends": "Тренды",
+    "achievements": "Достижения",
+    "period": {
+      "week": "Неделя",
+      "month": "Месяц",
+      "year": "Год",
+      "allTime": "Все время"
+    }
+  },
+  "telegram": {
+    "debug": "Отладка Telegram",
+    "userInfo": "Информация о пользователе",
+    "webAppInfo": "Информация о веб-приложении",
+    "theme": "Тема",
+    "language": "Язык",
+    "platform": "Платформа",
+    "version": "Версия",
+    "available": "Доступно",
+    "notAvailable": "Недоступно"
+  },
+  "common": {
+    "loading": "Загрузка...",
+    "error": "Произошла ошибка",
+    "success": "Успешно",
+    "warning": "Предупреждение",
+    "info": "Информация",
+    "confirm": "Подтвердить",
+    "dismiss": "Отклонить",
+    "retry": "Повторить",
+    "refresh": "Обновить",
+    "search": "Поиск",
+    "filter": "Фильтр",
+    "sort": "Сортировка",
+    "view": "Просмотр",
+    "details": "Детали",
+    "settings": "Настройки",
+    "help": "Помощь",
+    "about": "О приложении"
+  },
+  "units": {
+    "metric": "Метрическая",
+    "imperial": "Имперская",
+    "cm": "см",
+    "kg": "кг",
+    "lbs": "фунт",
+    "ft": "фут",
+    "in": "дюйм"
+  },
+  "genders": {
+    "male": "Мужской",
+    "female": "Женский",
+    "other": "Другой",
+    "preferNotToSay": "Предпочитаю не указывать"
+  },
+  "activityLevels": {
+    "sedentary": "Малоподвижный",
+    "lightlyActive": "Легко активный",
+    "moderatelyActive": "Умеренно активный",
+    "veryActive": "Очень активный",
+    "extremelyActive": "Крайне активный"
+  },
+  "moods": {
+    "excellent": "Отличное",
+    "good": "Хорошее",
+    "neutral": "Нейтральное",
+    "bad": "Плохое",
+    "terrible": "Ужасное"
+  },
+  "stressLevels": {
+    "low": "Низкий",
+    "moderate": "Умеренный",
+    "high": "Высокий",
+    "veryHigh": "Очень высокий"
+  },
+  "sleepQuality": {
+    "excellent": "Отличное",
+    "good": "Хорошее",
+    "fair": "Удовлетворительное",
+    "poor": "Плохое",
+    "veryPoor": "Очень плохое"
+  },
+  "discounts": {
+    "title": "Скидки",
+    "searchPlaceholder": "Поиск скидок...",
+    "nearbyOffers": "Ближайшие предложения",
+    "off": "СКИДКА",
+    "location": "Местоположение",
+    "away": "отсюда",
+    "validUntil": "Действует до",
+    "getDirections": "Проложить маршрут",
+    "share": "Поделиться",
+    "shareText": "Посмотрите на эту удивительную скидку:",
+    "copiedToClipboard": "Скопировано в буфер обмена!",
+    "categories": {
+      "all": "Все",
+      "fitness": "Фитнес",
+      "nutrition": "Питание",
+      "wellness": "Здоровье",
+      "sports": "Спорт"
+    }
+  }
+} 
