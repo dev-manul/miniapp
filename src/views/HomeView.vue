@@ -50,6 +50,13 @@ const showArrow = ref(false)
 // Menu items
 const menuItems = [
   {
+    name: 'profile',
+    label: 'Profile',
+    route: '/profile',
+    icon: ProfileIcon,
+    class: 'nav-profile'
+  },
+  {
     name: 'dashboard',
     label: 'Dashboard',
     route: '/dashboard',
@@ -69,13 +76,6 @@ const menuItems = [
     route: '/statistics',
     icon: StatisticsIcon,
     class: 'nav-statistics'
-  },
-  {
-    name: 'profile',
-    label: 'Profile',
-    route: '/profile',
-    icon: ProfileIcon,
-    class: 'nav-profile'
   }
 ]
 
