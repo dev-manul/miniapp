@@ -93,6 +93,7 @@
             </svg>
           </button>
         </div>
+        
         <router-link 
           v-for="item in menuItems" 
           :key="item.name"
@@ -111,6 +112,12 @@
             </svg>
           </div>
         </router-link>
+        
+        <!-- Language Switcher -->
+        <div class="menu-language-section">
+          <h4>{{ t('common.language') }}</h4>
+          <LanguageSwitcher />
+        </div>
       </nav>
     </div>
   </div>
@@ -126,6 +133,7 @@ import GoalsIcon from '@/components/icons/GoalsIcon.vue'
 import StatisticsIcon from '@/components/icons/StatisticsIcon.vue'
 import ProfileIcon from '@/components/icons/ProfileIcon.vue'
 import DiscountsIcon from '@/components/icons/DiscountsIcon.vue'
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
 
 const router = useRouter()
 const { t } = useI18n()
@@ -359,6 +367,9 @@ const closeMenu = () => {
   min-width: 280px;
   max-width: 320px;
   border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .menu-header {
@@ -383,6 +394,21 @@ const closeMenu = () => {
   color: var(--text-secondary);
   cursor: pointer;
   padding: 4px;
+}
+
+.menu-language-section {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.menu-language-section h4 {
+  color: var(--text-primary);
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .nav-item {

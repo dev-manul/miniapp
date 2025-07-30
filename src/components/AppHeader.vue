@@ -25,8 +25,6 @@
       <span v-else>{{ actionButton.text }}</span>
     </button>
 
-    <!-- Language Switcher -->
-    <LanguageSwitcher />
   </div>
 
   <!-- Profile Section -->
@@ -66,7 +64,6 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useTelegram } from '@/composables/useTelegram'
-import LanguageSwitcher from './LanguageSwitcher.vue'
 
 interface ActionButton {
   icon?: any

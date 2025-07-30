@@ -142,7 +142,8 @@
     "details": "Details",
     "settings": "Settings",
     "help": "Help",
-    "about": "About"
+    "about": "About",
+    "language": "Language"
   },
   "units": {
     "metric": "Metric",
