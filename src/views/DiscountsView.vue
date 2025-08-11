@@ -124,81 +124,171 @@ const discountCategories = [
 const discounts = ref([
   {
     id: 1,
-    name: 'PowerFit Gym & Wellness',
-    description: 'Premium fitness center with modern equipment and expert trainers',
-    fullDescription: 'State-of-the-art gym featuring cardio zones, strength training areas, group fitness studios, and personal training services. Includes access to swimming pool, sauna, and recovery facilities. Perfect for all fitness levels from beginners to advanced athletes.',
-    discount: 30,
-    category: 'fitness',
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop',
-    address: '15 Amathountos Avenue, Limassol',
-    distance: 0.8,
+    name: 'Гайя органик шоп',
+    description: 'Organic and natural products store',
+    fullDescription: 'Premium organic store offering natural foods, supplements, and healthy lifestyle products. Wide selection of organic produce, superfoods, vitamins, and natural remedies.',
+    discount: 25,
+    category: 'nutrition',
+    image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=300&fit=crop',
+    address: 'Limassol, Cyprus',
+    distance: 0.5,
     validUntil: '2024-12-31',
-    coordinates: { lat: 34.681331, lng: 33.0439075 } // North
+    coordinates: { lat: 34.679331, lng: 33.0439075 },
+    googleMapsUrl: 'https://maps.app.goo.gl/zEoCuCxkfJcq2GZe9'
   },
   {
     id: 2,
-    name: 'Fresh & Organic Market',
-    description: 'Premium organic foods, supplements, and healthy lifestyle products',
-    fullDescription: 'Specialized store offering fresh organic produce, superfoods, vitamins, protein powders, and healthy snacks. Expert nutritionists available for consultations. Wide selection of gluten-free, vegan, and keto-friendly products.',
+    name: 'Now Supplements',
+    description: 'Premium quality supplements and vitamins',
+    fullDescription: 'Specialized store offering high-quality supplements, vitamins, minerals, and health products. Expert staff for personalized supplement recommendations.',
     discount: 20,
     category: 'nutrition',
     image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=300&fit=crop',
-    address: '28 Spyrou Kyprianou Street, Limassol',
-    distance: 1.2,
+    address: 'Limassol, Cyprus',
+    distance: 0.8,
     validUntil: '2024-11-30',
-    coordinates: { lat: 34.679331, lng: 33.0459075 } // East
+    coordinates: { lat: 34.680331, lng: 33.0449075 },
+    googleMapsUrl: 'https://maps.app.goo.gl/rHC6ToP9uoN2m1Za6'
   },
   {
     id: 3,
-    name: 'Serenity Spa & Wellness',
-    description: 'Luxury spa treatments and holistic wellness services',
-    fullDescription: 'Premium spa offering therapeutic massages, facial treatments, body wraps, and wellness therapies. Features meditation rooms, aromatherapy sessions, and stress relief programs. Professional therapists certified in various healing techniques.',
-    discount: 35,
-    category: 'wellness',
-    image: 'https://images.unsplash.com/photo-1544161512-84f9c86cb992?w=400&h=300&fit=crop',
-    address: '7 Promachon Street, Limassol',
-    distance: 1.5,
+    name: 'All Organic Store',
+    description: 'Complete organic lifestyle products',
+    fullDescription: 'Comprehensive organic store featuring fresh organic produce, natural foods, eco-friendly products, and sustainable lifestyle items.',
+    discount: 30,
+    category: 'nutrition',
+    image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=300&fit=crop',
+    address: 'Limassol, Cyprus',
+    distance: 1.2,
     validUntil: '2024-10-31',
-    coordinates: { lat: 34.677331, lng: 33.0439075 } // South
+    coordinates: { lat: 34.678331, lng: 33.0429075 },
+    googleMapsUrl: 'https://maps.app.goo.gl/uMx49SL23p2D7oFfA'
+  },
+  {
+    id: 4,
+    name: 'VIP Supplements',
+    description: 'Premium supplements and sports nutrition',
+    fullDescription: 'High-end supplement store offering premium sports nutrition, protein powders, pre-workout supplements, and specialized health products.',
+    discount: 35,
+    category: 'nutrition',
+    image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=300&fit=crop',
+    address: 'Limassol, Cyprus',
+    distance: 0.9,
+    validUntil: '2024-12-15',
+    coordinates: { lat: 34.679331, lng: 33.0459075 },
+    googleMapsUrl: 'https://maps.app.goo.gl/DoAzAjtBL4eD1W5cA'
   },
   {
     id: 5,
-    name: 'Elite Sports & Fitness',
-    description: 'Professional sports equipment and athletic wear',
-    fullDescription: 'Comprehensive sports store featuring premium athletic footwear, workout clothing, fitness accessories, and sports equipment. Expert staff for personalized fitting and recommendations. Brands include Nike, Adidas, Under Armour, and more.',
-    discount: 25,
-    category: 'sports',
+    name: 'PIMP My Body',
+    description: 'Fitness and body transformation center',
+    fullDescription: 'Comprehensive fitness center offering personal training, group classes, body transformation programs, and wellness services.',
+    discount: 40,
+    category: 'fitness',
     image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop',
-    address: '42 Makarios Avenue, Limassol',
-    distance: 2.1,
-    validUntil: '2024-12-15',
-    coordinates: { lat: 34.679331, lng: 33.0419075 } // West
+    address: 'Limassol, Cyprus',
+    distance: 1.5,
+    validUntil: '2024-11-15',
+    coordinates: { lat: 34.681331, lng: 33.0419075 },
+    googleMapsUrl: 'https://maps.app.goo.gl/RaVR6kfLQ9Zpr9KC9'
   },
   {
     id: 6,
-    name: 'Yoga Flow Studio',
-    description: 'Mindful yoga classes and meditation sessions',
-    fullDescription: 'Dedicated yoga studio offering various styles including Vinyasa, Hatha, Power Yoga, and meditation classes. Experienced instructors, peaceful environment, and all equipment provided. Perfect for stress relief and flexibility training.',
-    discount: 40,
-    category: 'wellness',
-    image: 'https://images.unsplash.com/photo-1544161512-84f9c86cb992?w=400&h=300&fit=crop',
-    address: '19 Athinon Street, Limassol',
-    distance: 1.8,
-    validUntil: '2024-11-15',
-    coordinates: { lat: 34.680331, lng: 33.0429075 } // Northeast
+    name: 'Bodytone',
+    description: 'Professional fitness and wellness center',
+    fullDescription: 'Premium fitness center with modern equipment, personal training, group fitness classes, and wellness programs.',
+    discount: 25,
+    category: 'fitness',
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop',
+    address: 'Limassol, Cyprus',
+    distance: 1.1,
+    validUntil: '2024-12-20',
+    coordinates: { lat: 34.680331, lng: 33.0429075 },
+    googleMapsUrl: 'https://maps.app.goo.gl/BNGWtXXcPnb88CK7A'
   },
   {
     id: 7,
-    name: 'Protein Plus Nutrition',
-    description: 'Specialized sports nutrition and supplements',
-    fullDescription: 'Expert sports nutrition store offering premium protein powders, pre-workout supplements, BCAAs, vitamins, and meal replacement products. Certified nutritionists provide personalized supplement plans and dietary advice.',
+    name: 'On Off Store',
+    description: 'Sports equipment and fitness gear',
+    fullDescription: 'Specialized sports store offering fitness equipment, workout gear, sports accessories, and athletic wear.',
+    discount: 20,
+    category: 'sports',
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop',
+    address: 'Limassol, Cyprus',
+    distance: 0.7,
+    validUntil: '2024-11-30',
+    coordinates: { lat: 34.679331, lng: 33.0449075 },
+    googleMapsUrl: 'https://maps.app.goo.gl/nVeHuab596EoCw1v5'
+  },
+  {
+    id: 8,
+    name: 'Green Life',
+    description: 'Natural and organic lifestyle products',
+    fullDescription: 'Eco-friendly store offering natural products, organic foods, sustainable lifestyle items, and wellness products.',
+    discount: 30,
+    category: 'wellness',
+    image: 'https://images.unsplash.com/photo-1544161512-84f9c86cb992?w=400&h=300&fit=crop',
+    address: 'Limassol, Cyprus',
+    distance: 1.3,
+    validUntil: '2024-10-31',
+    coordinates: { lat: 34.677331, lng: 33.0439075 },
+    googleMapsUrl: 'https://maps.app.goo.gl/q4iN71v92pcAdV5eA'
+  },
+  {
+    id: 9,
+    name: 'Holland & Barrett',
+    description: 'Health food and supplement store',
+    fullDescription: 'International health food chain offering vitamins, supplements, natural foods, and health products.',
     discount: 15,
     category: 'nutrition',
     image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=300&fit=crop',
-    address: '33 Kolonakiou Street, Limassol',
-    distance: 0.9,
-    validUntil: '2024-12-20',
-    coordinates: { lat: 34.678331, lng: 33.0449075 } // Southeast
+    address: 'Limassol, Cyprus',
+    distance: 0.6,
+    validUntil: '2024-12-31',
+    coordinates: { lat: 34.679331, lng: 33.0439075 },
+    googleMapsUrl: 'https://maps.app.goo.gl/qoPyEB3Bo9UQQEVeA'
+  },
+  {
+    id: 10,
+    name: 'Sentosa',
+    description: 'Wellness and relaxation center',
+    fullDescription: 'Premium wellness center offering spa treatments, massage therapy, relaxation services, and holistic healing.',
+    discount: 35,
+    category: 'wellness',
+    image: 'https://images.unsplash.com/photo-1544161512-84f9c86cb992?w=400&h=300&fit=crop',
+    address: 'Limassol, Cyprus',
+    distance: 1.4,
+    validUntil: '2024-11-15',
+    coordinates: { lat: 34.681331, lng: 33.0429075 },
+    googleMapsUrl: 'https://maps.app.goo.gl/QFzS8nsNGdJmWAPs8'
+  },
+  {
+    id: 11,
+    name: 'Olympia Centre',
+    description: 'Sports and fitness complex',
+    fullDescription: 'Large sports complex featuring multiple fitness facilities, swimming pools, sports courts, and wellness services.',
+    discount: 25,
+    category: 'fitness',
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop',
+    address: 'Limassol, Cyprus',
+    distance: 1.8,
+    validUntil: '2024-12-15',
+    coordinates: { lat: 34.682331, lng: 33.0439075 },
+    googleMapsUrl: 'https://maps.app.goo.gl/NSavC7ZjCicCA6F59'
+  },
+  {
+    id: 12,
+    name: 'Muscle Factory',
+    description: 'Bodybuilding and strength training gym',
+    fullDescription: 'Specialized gym focused on bodybuilding, strength training, powerlifting, and muscle development.',
+    discount: 45,
+    category: 'fitness',
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop',
+    address: 'Limassol, Cyprus',
+    distance: 1.0,
+    validUntil: '2024-11-30',
+    coordinates: { lat: 34.679331, lng: 33.0419075 },
+    googleMapsUrl: 'https://maps.app.goo.gl/FrPQ5G8MaxrbSjT9A'
   }
 ])
 
@@ -301,9 +391,14 @@ const filterDiscounts = () => {
 const getDirections = () => {
   if (!selectedDiscount.value) return
   
-  const { lat, lng } = selectedDiscount.value.coordinates
-  const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`
-  window.open(url, '_blank')
+  if (selectedDiscount.value.googleMapsUrl) {
+    window.open(selectedDiscount.value.googleMapsUrl, '_blank')
+  } else {
+    // Fallback to coordinates-based URL
+    const { lat, lng } = selectedDiscount.value.coordinates
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`
+    window.open(url, '_blank')
+  }
 }
 
 const shareDiscount = () => {
