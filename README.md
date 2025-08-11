@@ -122,7 +122,7 @@ npm run build
 Create a `.env` file for environment-specific settings:
 
 ```env
-VITE_API_BASE_URL=http://localhost:8080/api/v1
+VITE_API_BASE_URL=https://reforma-bot-production.up.railway.app/api/v1
 ```
 
 ### API Configuration
@@ -130,7 +130,7 @@ VITE_API_BASE_URL=http://localhost:8080/api/v1
 Update the API base URL in `src/services/api.ts`:
 
 ```typescript
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api/v1'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://reforma-bot-production.up.railway.app/api/v1'
 ```
 
 ## 📱 Telegram Web App Integration
