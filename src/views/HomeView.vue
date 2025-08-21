@@ -16,68 +16,218 @@
         <p class="welcome-subtitle">{{ t('dashboard.subtitle') }}</p>
       </div>
 
-      <!-- Quick Stats -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-icon">📊</div>
-          <div class="stat-content">
-            <div class="stat-value">7</div>
-            <div class="stat-label">{{ t('dashboard.daysStreak') }}</div>
+      <!-- Weight Scale Section -->
+      <div class="section-card">
+        <h3 class="section-title">{{ t('dashboard.weightScale') }}</h3>
+        <div class="weight-scale">
+          <div class="scale-labels">
+            <span>0</span>
+            <span>{{ currentWeight }}kg</span>
           </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">✅</div>
-          <div class="stat-content">
-            <div class="stat-value">85%</div>
-            <div class="stat-label">{{ t('dashboard.completion') }}</div>
+          <div class="scale-bar">
+            <div class="scale-fill green" :style="{ width: `${(targetWeight / currentWeight) * 100}%` }"></div>
+            <div class="scale-fill yellow" :style="{ width: `${((currentWeight - targetWeight) / currentWeight) * 100}%` }"></div>
           </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">🎯</div>
-          <div class="stat-content">
-            <div class="stat-value">12</div>
-            <div class="stat-label">{{ t('dashboard.activeGoals') }}</div>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">🔥</div>
-          <div class="stat-content">
-            <div class="stat-value">3.2k</div>
-            <div class="stat-label">{{ t('dashboard.pointsEarned') }}</div>
+          <div class="weight-info">
+            <span class="target-weight">Цель: {{ targetWeight }}kg</span>
+            <span class="current-weight">Текущий: {{ currentWeight }}kg</span>
           </div>
         </div>
       </div>
 
+      <!-- Water Tracking Section -->
+      <div class="section-card">
+        <h3 class="section-title">{{ t('dashboard.waterTracking') }}</h3>
+        <div class="water-container">
+          <div class="water-bottle">
+            <div class="water-fill" :style="{ height: `${(waterDrunk / waterGoal) * 100}%` }">
+              <div class="water-waves"></div>
+            </div>
+            <div class="bottle-cap"></div>
+          </div>
+          <div class="water-stats">
+            <div class="water-amount">{{ waterDrunk }}л / {{ waterGoal }}л</div>
+            <div class="water-progress">{{ Math.round((waterDrunk / waterGoal) * 100) }}%</div>
+            <button class="add-water-btn" @click="addWater">+ 0.25л</button>
+          </div>
+        </div>
+      </div>
 
+      <!-- Discipline Meter Section -->
+      <div class="section-card clickable" @click="showDisciplineDetails">
+        <h3 class="section-title">{{ t('dashboard.discipline') }}</h3>
+        <div class="discipline-meter">
+          <div class="meter-circle">
+            <svg viewBox="0 0 120 120" class="meter-svg">
+              <circle cx="60" cy="60" r="54" class="meter-bg" />
+              <circle 
+                cx="60" cy="60" r="54" 
+                class="meter-fill" 
+                :stroke-dasharray="`${disciplineScore * 3.39} 339.3`"
+              />
+            </svg>
+            <div class="meter-value">{{ disciplineScore }}%</div>
+          </div>
+          <div class="discipline-tips">
+            <p>Нажмите для деталей</p>
+            <p>Утренние привычки • Регулярность • Фокус</p>
+          </div>
+        </div>
+      </div>
 
-      <!-- Recent Activity -->
-      <div class="recent-activity">
-        <h3 class="section-title">{{ t('dashboard.recentActivity') }}</h3>
-        <div class="activity-list">
-          <div class="activity-item">
-            <div class="activity-icon">🏃‍♂️</div>
-            <div class="activity-content">
-              <div class="activity-title">{{ t('dashboard.activities.morningRun') }}</div>
-              <div class="activity-time">{{ t('dashboard.timeAgo', { time: '2' }) }}</div>
+      <!-- Stats Row -->
+      <div class="stats-row">
+        <!-- Streak Counter -->
+        <div class="stat-card clickable" @click="showStreakDetails">
+          <div class="stat-icon">🔥</div>
+          <div class="stat-value">{{ streakDays }}</div>
+          <div class="stat-label">{{ t('dashboard.streak') }}</div>
+          <div class="stat-subtitle">{{ achievementsCount }} достижений</div>
+        </div>
+
+        <!-- Tokens Counter -->
+        <div class="stat-card clickable" @click="showTokensDetails">
+          <div class="stat-icon">🪙</div>
+          <div class="stat-value">{{ tokens }}</div>
+          <div class="stat-label">{{ t('dashboard.tokens') }}</div>
+          <div class="stat-subtitle">Рейтинг</div>
+        </div>
+
+        <!-- Partners -->
+        <div class="stat-card clickable" @click="showPartners">
+          <div class="stat-icon">🤝</div>
+          <div class="stat-value">Партнеры</div>
+          <div class="stat-label">Карта</div>
+          <div class="stat-subtitle">Потратить токены</div>
+        </div>
+      </div>
+
+      <!-- Daily Tasks Section -->
+      <div class="section-card">
+        <h3 class="section-title">{{ t('dashboard.dailyTasks') }}</h3>
+        <div class="tasks-list">
+          <div 
+            v-for="task in dailyTasks" 
+            :key="task.id" 
+            class="task-item"
+            :class="{ completed: task.completed }"
+          >
+            <div class="task-info">
+              <div class="task-title">{{ task.title }}</div>
+              <div class="task-time">{{ task.time }}</div>
             </div>
-            <div class="activity-status completed">✓</div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-icon">📚</div>
-            <div class="activity-content">
-              <div class="activity-title">{{ t('dashboard.activities.readPages') }}</div>
-              <div class="activity-time">{{ t('dashboard.timeAgo', { time: '4' }) }}</div>
+            <div class="task-actions">
+              <button 
+                class="task-btn" 
+                :class="{ 'completed': task.completed }"
+                @click="toggleTask(task.id)"
+              >
+                {{ task.completed ? '✓' : '○' }}
+              </button>
+              <button class="calendar-sync-btn" @click="syncWithCalendar(task.id)">
+                📅
+              </button>
             </div>
-            <div class="activity-status completed">✓</div>
           </div>
-          <div class="activity-item">
-            <div class="activity-icon">💧</div>
-            <div class="activity-content">
-              <div class="activity-title">{{ t('dashboard.activities.drinkWater') }}</div>
-              <div class="activity-time">{{ t('dashboard.timeAgo', { time: '6' }) }}</div>
+        </div>
+        <button class="sync-all-btn" @click="syncAllWithCalendar">
+          Синхронизировать с календарем
+        </button>
+      </div>
+
+      <!-- Active Goals Section -->
+      <div class="section-card">
+        <h3 class="section-title">{{ t('dashboard.activeGoals') }}</h3>
+        <div class="goals-list">
+          <div 
+            v-for="goal in activeGoals" 
+            :key="goal.id" 
+            class="goal-item"
+          >
+            <div class="goal-icon">{{ goal.icon }}</div>
+            <div class="goal-content">
+              <div class="goal-title">{{ goal.title }}</div>
+              <div class="goal-progress">
+                <div class="progress-bar">
+                  <div class="progress-fill" :style="{ width: `${goal.progress}%` }"></div>
+                </div>
+                <span class="progress-text">{{ goal.progress }}%</span>
+              </div>
             </div>
-            <div class="activity-status pending">⋯</div>
           </div>
+        </div>
+      </div>
+
+      <!-- Knowledge Library Section -->
+      <div class="section-card">
+        <h3 class="section-title">{{ t('dashboard.knowledgeLibrary') }}</h3>
+        <div class="library-intro">
+          <p>{{ t('dashboard.libraryDescription') }}</p>
+        </div>
+        
+        <div class="expert-categories">
+          <div class="category-tabs">
+            <button 
+              v-for="category in expertCategories" 
+              :key="category.id"
+              class="category-tab"
+              :class="{ active: selectedCategory === category.id }"
+              @click="selectCategory(category.id)"
+            >
+              {{ category.icon }} {{ category.name }}
+            </button>
+          </div>
+        </div>
+
+        <div class="materials-grid">
+          <div 
+            v-for="material in filteredMaterials" 
+            :key="material.id" 
+            class="material-card"
+            :class="{ premium: material.isPremium }"
+          >
+            <div class="material-header">
+              <div class="expert-info">
+                <img :src="material.expertAvatar" :alt="material.expertName" class="expert-avatar" />
+                <div class="expert-details">
+                  <div class="expert-name">{{ material.expertName }}</div>
+                  <div class="expert-specialty">{{ material.expertSpecialty }}</div>
+                </div>
+              </div>
+              <div class="material-badge" v-if="material.isPremium">
+                <span class="premium-icon">⭐</span>
+                <span class="premium-text">{{ t('dashboard.premium') }}</span>
+              </div>
+            </div>
+            
+            <div class="material-content">
+              <h4 class="material-title">{{ material.title }}</h4>
+              <p class="material-description">{{ material.description }}</p>
+              <div class="material-meta">
+                <span class="material-type">{{ material.type }}</span>
+                <span class="material-duration">{{ material.duration }}</span>
+                <span class="material-views">{{ material.views }} просмотров</span>
+              </div>
+            </div>
+
+            <div class="material-actions">
+              <button class="view-material-btn" @click="viewMaterial(material.id)">
+                {{ material.isPremium ? t('dashboard.subscribeToView') : t('dashboard.view') }}
+              </button>
+              <button class="like-material-btn" @click="likeMaterial(material.id)">
+                <span class="like-icon">{{ material.isLiked ? '❤️' : '🤍' }}</span>
+                <span class="like-count">{{ material.likes }}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="become-expert">
+          <h4>{{ t('dashboard.becomeExpert') }}</h4>
+          <p>{{ t('dashboard.expertDescription') }}</p>
+          <button class="become-expert-btn" @click="showExpertApplication">
+            {{ t('dashboard.applyAsExpert') }}
+          </button>
         </div>
       </div>
     </div>
@@ -128,7 +278,6 @@ import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import AppHeader from '@/components/AppHeader.vue'
-import DashboardIcon from '@/components/icons/DashboardIcon.vue'
 import GoalsIcon from '@/components/icons/GoalsIcon.vue'
 import StatisticsIcon from '@/components/icons/StatisticsIcon.vue'
 import ProfileIcon from '@/components/icons/ProfileIcon.vue'
@@ -143,7 +292,121 @@ const disciplineProgress = ref(65)
 const showArrow = ref(false)
 const showMenu = ref(false)
 
-// Menu items
+// Weight tracking
+const currentWeight = ref(85)
+const targetWeight = ref(70)
+
+// Water tracking
+const waterDrunk = ref(1.8)
+const waterGoal = ref(2.5)
+
+// Discipline
+const disciplineScore = ref(78)
+
+// Stats
+const streakDays = ref(12)
+const achievementsCount = ref(47)
+const tokens = ref(1250)
+
+// Daily tasks
+const dailyTasks = ref([
+  { id: 1, title: 'Упражнения для шеи', time: '09:00', completed: true },
+  { id: 2, title: 'Приседания', time: '12:00', completed: false },
+  { id: 3, title: 'Растяжка', time: '18:00', completed: false },
+  { id: 4, title: 'Дыхательные упражнения', time: '21:00', completed: false }
+])
+
+// Active goals
+const activeGoals = ref([
+  { id: 1, title: 'Похудеть до 70кг', icon: '⚖️', progress: 65 },
+  { id: 2, title: 'Выучить английский B2', icon: '📚', progress: 42 },
+  { id: 3, title: 'Начать бегать', icon: '🏃‍♂️', progress: 23 },
+  { id: 4, title: 'Медитировать каждый день', icon: '🧘‍♀️', progress: 89 }
+])
+
+// Knowledge Library
+const selectedCategory = ref('all')
+
+const expertCategories = ref([
+  { id: 'all', name: 'Все', icon: '📚' },
+  { id: 'fitness', name: 'Фитнес', icon: '💪' },
+  { id: 'yoga', name: 'Йога', icon: '🧘‍♀️' },
+  { id: 'massage', name: 'Массаж', icon: '💆‍♀️' },
+  { id: 'nutrition', name: 'Питание', icon: '🥗' },
+  { id: 'mental', name: 'Ментальное здоровье', icon: '🧠' }
+])
+
+const knowledgeMaterials = ref([
+  {
+    id: 1,
+    title: 'Утренняя зарядка для офиса',
+    description: '5 простых упражнений, которые можно делать прямо за рабочим столом',
+    type: 'Видео',
+    duration: '8 мин',
+    views: 1247,
+    likes: 89,
+    isLiked: false,
+    isPremium: false,
+    expertName: 'Анна Петрова',
+    expertSpecialty: 'Фитнес-тренер',
+    expertAvatar: '/avatar-ideal.png',
+    category: 'fitness'
+  },
+  {
+    id: 2,
+    title: 'Техника самомассажа шеи',
+    description: 'Снимаем напряжение после рабочего дня за 10 минут',
+    type: 'Гайд',
+    duration: '10 мин',
+    views: 2156,
+    likes: 156,
+    isLiked: true,
+    isPremium: false,
+    expertName: 'Михаил Соколов',
+    expertSpecialty: 'Массажист',
+    expertAvatar: '/avatar-ideal.png',
+    category: 'massage'
+  },
+  {
+    id: 3,
+    title: 'Медитация для начинающих',
+    description: 'Пошаговое руководство по медитации для тех, кто никогда не медитировал',
+    type: 'Аудио',
+    duration: '15 мин',
+    views: 3421,
+    likes: 234,
+    isLiked: false,
+    isPremium: true,
+    expertName: 'Елена Морозова',
+    expertSpecialty: 'Психолог',
+    expertAvatar: '/avatar-ideal.png',
+    category: 'mental'
+  },
+  {
+    id: 4,
+    title: 'Правильное питание для похудения',
+    description: 'Основы здорового питания без жестких диет',
+    type: 'Статья',
+    duration: '12 мин',
+    views: 1890,
+    likes: 123,
+    isLiked: false,
+    isPremium: false,
+    expertName: 'Дарья Козлова',
+    expertSpecialty: 'Нутрициолог',
+    expertAvatar: '/avatar-ideal.png',
+    category: 'nutrition'
+  }
+])
+
+const filteredMaterials = computed(() => {
+  if (selectedCategory.value === 'all') {
+    return knowledgeMaterials.value
+  }
+  return knowledgeMaterials.value.filter(material => material.category === selectedCategory.value)
+})
+
+// Menu items (removed dashboard since it's now merged)
 const menuItems = computed(() => [
   {
     name: 'profile',
@@ -151,13 +414,6 @@ const menuItems = computed(() => [
     route: '/profile',
     icon: ProfileIcon,
     class: 'nav-profile'
-  },
-  {
-    name: 'dashboard',
-    label: t('navigation.dashboard'),
-    route: '/dashboard',
-    icon: DashboardIcon,
-    class: 'nav-dashboard'
   },
   {
     name: 'goals',
@@ -190,6 +446,71 @@ const toggleMenu = () => {
 const closeMenu = () => {
   showMenu.value = false
 }
+
+const addWater = () => {
+  if (waterDrunk.value < waterGoal.value) {
+    waterDrunk.value = Math.min(waterDrunk.value + 0.25, waterGoal.value)
+  }
+}
+
+const toggleTask = (taskId: number) => {
+  const task = dailyTasks.value.find(t => t.id === taskId)
+  if (task) {
+    task.completed = !task.completed
+  }
+}
+
+const syncWithCalendar = (taskId: number) => {
+  console.log('Syncing task with calendar:', taskId)
+  // TODO: Implement calendar sync
+}
+
+const syncAllWithCalendar = () => {
+  console.log('Syncing all tasks with calendar')
+  // TODO: Implement bulk calendar sync
+}
+
+const showDisciplineDetails = () => {
+  console.log('Show discipline details')
+  // TODO: Navigate to discipline details page
+}
+
+const showStreakDetails = () => {
+  console.log('Show streak details')
+  // TODO: Navigate to streak details page
+}
+
+const showTokensDetails = () => {
+  console.log('Show tokens details')
+  // TODO: Navigate to tokens/ranking page
+}
+
+const showPartners = () => {
+  console.log('Show partners map')
+  // TODO: Navigate to partners page
+}
+
+const selectCategory = (categoryId: string) => {
+  selectedCategory.value = categoryId
+}
+
+const viewMaterial = (materialId: number) => {
+  console.log('View material:', materialId)
+  // TODO: Navigate to material view page
+}
+
+const likeMaterial = (materialId: number) => {
+  const material = knowledgeMaterials.value.find(m => m.id === materialId)
+  if (material) {
+    material.isLiked = !material.isLiked
+    material.likes += material.isLiked ? 1 : -1
+  }
+}
+
+const showExpertApplication = () => {
+  console.log('Show expert application form')
+  // TODO: Navigate to expert application page
+}
 </script>
 
 <style scoped>
@@ -204,6 +525,7 @@ const closeMenu = () => {
 .dashboard-content {
   flex: 1;
   overflow-y: auto;
+  padding-bottom: 20px;
 }
 
 .welcome-section {
@@ -224,36 +546,237 @@ const closeMenu = () => {
   margin: 0;
 }
 
-.stats-grid {
+.section-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color);
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.clickable {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.clickable:hover {
+  transform: translateY(-2px);
+}
+
+/* Weight Scale */
+.weight-scale {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.scale-bar {
+  height: 20px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.scale-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.scale-fill.green {
+  background: linear-gradient(90deg, #4CAF50, #66BB6A);
+}
+
+.scale-fill.yellow {
+  background: linear-gradient(90deg, #FFC107, #FFD54F);
+}
+
+.weight-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.target-weight {
+  color: var(--accent-green);
+  font-weight: 500;
+}
+
+.current-weight {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Water Tracking */
+.water-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.water-bottle {
+  width: 60px;
+  height: 120px;
+  background: #e3f2fd;
+  border: 3px solid #2196f3;
+  border-radius: 30px 30px 8px 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.water-fill {
+  background: linear-gradient(180deg, #2196f3, #64b5f6);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: height 0.5s ease;
+  border-radius: 0 0 25px 25px;
+}
+
+.water-waves {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: linear-gradient(180deg, transparent, #1976d2);
+  border-radius: 50%;
+  animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(10px); }
+}
+
+.bottle-cap {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 8px;
+  background: #1976d2;
+  border-radius: 4px;
+}
+
+.water-stats {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.water-amount {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.water-progress {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.add-water-btn {
+  background: var(--accent-blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.add-water-btn:hover {
+  background: #1976d2;
+}
+
+/* Discipline Meter */
+.discipline-meter {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.meter-circle {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.meter-svg {
+  transform: rotate(-90deg);
+}
+
+.meter-bg {
+  fill: none;
+  stroke: #e0e0e0;
+  stroke-width: 8;
+}
+
+.meter-fill {
+  fill: none;
+  stroke: var(--accent-green);
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.5s ease;
+}
+
+.meter-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.discipline-tips {
+  flex: 1;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Stats Row */
+.stats-row {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  margin-bottom: 32px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
 .stat-card {
   background: var(--card-bg);
-  border-radius: 16px;
-  padding: 20px;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
   border: 1px solid var(--border-color);
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  transition: transform 0.2s ease;
 }
 
 .stat-icon {
-  font-size: 32px;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--secondary-bg);
-  border-radius: 12px;
-}
-
-.stat-content {
-  flex: 1;
+  font-size: 24px;
+  margin-bottom: 8px;
 }
 
 .stat-value {
@@ -264,85 +787,417 @@ const closeMenu = () => {
 }
 
 .stat-label {
-  font-size: 14px;
+  font-size: 12px;
   color: var(--text-secondary);
   font-weight: 500;
+  margin-bottom: 4px;
 }
 
-.section-title {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 16px;
+.stat-subtitle {
+  font-size: 10px;
+  color: var(--text-secondary);
 }
 
-.recent-activity {
-  margin-bottom: 24px;
-}
-
-.activity-list {
+/* Tasks */
+.tasks-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin-bottom: 16px;
 }
 
-.activity-item {
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  background: var(--secondary-bg);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.task-item.completed {
+  opacity: 0.7;
+}
+
+.task-info {
+  flex: 1;
+}
+
+.task-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.task-time {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.task-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.task-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.task-btn.completed {
+  background: var(--accent-green);
+  border-color: var(--accent-green);
+  color: white;
+}
+
+.calendar-sync-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: var(--secondary-bg);
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.calendar-sync-btn:hover {
+  background: var(--accent-blue);
+  color: white;
+}
+
+.sync-all-btn {
+  width: 100%;
+  background: var(--accent-blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.sync-all-btn:hover {
+  background: #1976d2;
+}
+
+/* Goals */
+.goals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.goal-item {
   display: flex;
   align-items: center;
   gap: 16px;
   padding: 16px;
-  background: var(--card-bg);
+  background: var(--secondary-bg);
   border-radius: 12px;
   border: 1px solid var(--border-color);
 }
 
-.activity-icon {
+.goal-icon {
   font-size: 24px;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--secondary-bg);
-  border-radius: 8px;
+  background: var(--card-bg);
+  border-radius: 50%;
 }
 
-.activity-content {
+.goal-content {
   flex: 1;
 }
 
-.activity-title {
-  font-size: 16px;
+.goal-title {
+  font-size: 14px;
   font-weight: 500;
   color: var(--text-primary);
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
-.activity-time {
-  font-size: 14px;
-  color: var(--text-secondary);
-}
-
-.activity-status {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
+.goal-progress {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: bold;
+  gap: 12px;
 }
 
-.activity-status.completed {
+.progress-bar {
+  flex: 1;
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-green), #66BB6A);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  min-width: 30px;
+}
+
+/* Knowledge Library */
+.library-intro {
+  margin-bottom: 20px;
+}
+
+.library-intro p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.expert-categories {
+  margin-bottom: 20px;
+}
+
+.category-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.category-tab {
+  background: var(--secondary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.category-tab:hover {
+  background: var(--card-bg);
+  border-color: var(--accent-green);
+}
+
+.category-tab.active {
   background: var(--accent-green);
+  border-color: var(--accent-green);
   color: white;
 }
 
-.activity-status.pending {
-  background: var(--secondary-bg);
-  color: var(--text-secondary);
+.materials-grid {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.material-card {
+  background: var(--card-bg);
   border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  transition: transform 0.2s ease;
+}
+
+.material-card:hover {
+  transform: translateY(-2px);
+}
+
+.material-card.premium {
+  border-color: var(--accent-yellow);
+  background: linear-gradient(135deg, var(--card-bg) 0%, rgba(212, 175, 55, 0.1) 100%);
+}
+
+.material-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.expert-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.expert-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.expert-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.expert-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.expert-specialty {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.material-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--accent-yellow);
+  color: #000;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.premium-icon {
+  font-size: 12px;
+}
+
+.material-content {
+  margin-bottom: 16px;
+}
+
+.material-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.material-description {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.material-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.material-type {
+  background: var(--accent-blue);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.material-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.view-material-btn {
+  background: var(--accent-green);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.view-material-btn:hover {
+  background: #3a6a3a;
+}
+
+.like-material-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.like-material-btn:hover {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+.like-icon {
+  font-size: 14px;
+}
+
+.like-count {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.become-expert {
+  background: var(--secondary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.become-expert h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.become-expert p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.become-expert-btn {
+  background: var(--accent-blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.become-expert-btn:hover {
+  background: #1976d2;
 }
 
 /* Menu Overlay */
@@ -453,18 +1308,45 @@ const closeMenu = () => {
     font-size: 24px;
   }
   
-  .stats-grid {
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .water-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .discipline-meter {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .category-tabs {
+    gap: 6px;
+  }
+  
+  .category-tab {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .materials-grid {
     gap: 12px;
   }
   
-  .stat-card {
-    padding: 16px;
+  .material-card {
+    padding: 12px;
   }
   
-  .stat-icon {
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
+  .material-actions {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  .view-material-btn {
+    width: 100%;
   }
   
   .navigation-menu {
